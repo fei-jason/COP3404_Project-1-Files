@@ -107,11 +107,11 @@ void insertStudent(struct student* hashTable[], struct student* temp)
 			hashTable[hashValue]->gpa = temp->gpa;
 			inserted = true;
 		} else {
-			if (hashTable[hashValue]->name == temp->name) {
+			if (strcmp(hashTable[hashValue]->name, temp->name) == 0) {
 				displayError(DuplicateName, hashTable[hashValue]->name);
 				inserted = true;
 				dupName = true;
-			}
+			} 
 			hashValue++;
 		}
 	}
