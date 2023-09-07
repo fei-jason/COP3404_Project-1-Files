@@ -27,7 +27,7 @@ int computeHash(char* studentName)
 		hash += studentName[i];
 	}
 
-	return hash % MOD_SIZE + HASH_TABLE_SEGMENTS;
+	return hash % MOD_SIZE * HASH_TABLE_SEGMENTS;
 }
 
 /*
