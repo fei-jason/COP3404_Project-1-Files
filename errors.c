@@ -49,9 +49,12 @@ void displayError(int errorType, char* errorInfo)
         case DuplicateName:
             printf("Error : Duplicate Student Name (%s)\n", errorInfo);
             break;
-        // case FileNotFound:
-        //     printf("Error : Program Unable To Find Specified File (%s)\n", errorInfo);
-        //     break;
+        case FileNotFound:
+            printf("Error : Program Unable To Find Specified File (%s)\n", errorInfo);
+            break;
+        case CommandLineArgs:
+            printf("Error : Missing Command-line Arguments\n", errorInfo);
+            break;
         default:
             break;
 

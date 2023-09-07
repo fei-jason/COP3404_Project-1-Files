@@ -24,14 +24,15 @@ int main(int argc, char *argv[])
 	struct student* hashTable[TABLE_SIZE];
 	initializeTable(hashTable);
 
-	printf("%-10s", "Hash Table Logs\n");
-	for (int i = 0; i < 90; i++) {
-		printf("-");
+	if (argv[1] != NULL) {
+		processInputFile(hashTable, argv[1]);
+		displayHashTable(hashTable);
+	} else {
+		displayError(CommandLineArgs, NULL);
+		exit(1);
 	}
-	printf("\n");
 
-	processInputFile(hashTable, argv[1]);
-	displayHashTable(hashTable);
+
 }
 
 /* 
@@ -83,8 +84,16 @@ void processInputFile(struct student* hashTable[], char* filename)
 	ptr = fopen(filename, "r");
 	if (ptr == NULL){
 		//perform error handling here
+		displayError(FileNotFound, filename);
+		exit(1);
 	}
-	
+
+	printf("%-10s", "Hash Table Logs\n");
+	for (int i = 0; i < 90; i++) {
+		printf("-");
+	}
+	printf("\n");
+
 	while (fgets(record, INPUT_BUF_SIZE, ptr) != NULL) {
 		if (testRecord(record)) {
 			newStudent = createStudent(record);

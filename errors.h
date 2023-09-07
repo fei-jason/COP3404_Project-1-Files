@@ -11,7 +11,7 @@
 #pragma once
 
 // Keywords used to display appropriate error message
-enum errors { BlankRec, ShortRec, CorruptRec , NameLen, NumLen, NumFormat, EmailLen, EmailFormat, CreditsVal, GPAVal, DuplicateName};
+enum errors { BlankRec, ShortRec, CorruptRec , NameLen, NumLen, NumFormat, EmailLen, EmailFormat, CreditsVal, GPAVal, DuplicateName, FileNotFound, CommandLineArgs};
 
 // Function Prototypes
 void displayError(int errorType, char* errorInfo);
