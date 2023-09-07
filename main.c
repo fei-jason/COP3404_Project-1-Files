@@ -128,7 +128,7 @@ bool testRecord(char record[])
 	int strLen = strcspn(record, "");
 	int commaCnt = 0;
 	int newLineChar = 0;
-	char errorMessage[20];
+	char errorMessage[strLen + 1];
 
 	for (int i = 0; record[i] != '\0'; i++) {
 		if (record[i] == ',') {
