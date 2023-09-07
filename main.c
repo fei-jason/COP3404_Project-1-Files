@@ -102,10 +102,8 @@ void processInputFile(struct student* hashTable[], char* filename)
 				insertStudent(hashTable, &newStudent);
 			}
 		} 
-		
+		memset(record, '\0', sizeof(record));
 	}
-
-	memset(record, '\0', sizeof(record));
 	fclose(ptr);
 }
 
@@ -121,6 +119,28 @@ void processSearchFile(struct student* hashTable[], char* filename)
 	// Do not forget to use the following functions:
 	// strtok() - splits a string into separate parts
 	// memset() - fill the buffer array with the specified character
+	FILE* ptr;
+	char record[SEARCH_BUF_SIZE];
+
+	ptr = fopen(filename, "r");
+	if (ptr == NULL){
+		//perform error handling here
+		displayError(FileNotFound, filename);
+		exit(1);
+	}
+
+	// printf("%-10s", "Hash Table Logs\n");
+	// for (int i = 0; i < 90; i++) {
+	// 	printf("-");
+	// }
+	// printf("\n");
+
+	while (fgets(record, INPUT_BUF_SIZE, ptr) != NULL) {
+		
+
+		memset(record, '\0', sizeof(record));
+	}
+	fclose(ptr);
 }
 
 /*
@@ -137,7 +157,7 @@ bool testRecord(char record[])
 	int strLen = strcspn(record, "");
 	int commaCnt = 0;
 	int newLineChar = 0;
-	char errorMessage[strLen + 1];
+	char errorMessage[strLen];
 
 	for (int i = 0; record[i] != '\0'; i++) {
 		if (record[i] == ',') {
