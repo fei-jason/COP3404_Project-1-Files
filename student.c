@@ -85,15 +85,15 @@ bool testStudentData(struct student temp)
     }
 
     if (temp.credits < 0 || temp.credits > 150) {
-        char strCredits[5];
-        sprintf(strCredits, "%d", temp.credits);
+        char strCredits[10];
+        snprintf(strCredits, sizeof(strCredits), "%d", temp.credits);
         displayError(CreditsVal, strCredits);
         return false;
     }
 
     if (temp.gpa < 0 || temp.gpa > 4.0) {
-        char strGPA[5];
-        sprintf(strGPA, ".2%f", temp.gpa);
+        char strGPA[10];
+        snprintf(strGPA, sizeof(strGPA), "%f", temp.gpa);
         displayError(GPAVal, strGPA);
         return false;
     }

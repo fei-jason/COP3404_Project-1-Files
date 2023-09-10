@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
 	if (argv[1] != NULL) {
 		processInputFile(hashTable, argv[1]);
 		displayHashTable(hashTable);
+		if (argv[2] != NULL) {
+			processSearchFile(hashTable, argv[2]);
+		}
 	} else {
 		displayError(CommandLineArgs, NULL);
 		exit(1);
@@ -121,6 +124,8 @@ void processSearchFile(struct student* hashTable[], char* filename)
 	// memset() - fill the buffer array with the specified character
 	FILE* ptr;
 	char record[SEARCH_BUF_SIZE];
+	char* searchType;
+	char* searchQuery;
 
 	ptr = fopen(filename, "r");
 	if (ptr == NULL){
@@ -129,15 +134,17 @@ void processSearchFile(struct student* hashTable[], char* filename)
 		exit(1);
 	}
 
-	// printf("%-10s", "Hash Table Logs\n");
-	// for (int i = 0; i < 90; i++) {
-	// 	printf("-");
-	// }
-	// printf("\n");
+	printf("%-10s", "Search Results\n");
+	for (int i = 0; i < 90; i++) {
+		printf("-");
+	}
+	printf("\n");
 
 	while (fgets(record, INPUT_BUF_SIZE, ptr) != NULL) {
-		
-
+		char* copy = strdup(record);
+		searchType = strtok(copy, ",");
+		searchQuery = strtok(NULL, ",");
+		performSearch(hashTable, searchType, searchQuery);
 		memset(record, '\0', sizeof(record));
 	}
 	fclose(ptr);
@@ -157,7 +164,7 @@ bool testRecord(char record[])
 	int strLen = strcspn(record, "");
 	int commaCnt = 0;
 	int newLineChar = 0;
-	char errorMessage[strLen];
+	char errorMessage[strLen + 1];
 
 	for (int i = 0; record[i] != '\0'; i++) {
 		if (record[i] == ',') {
@@ -181,7 +188,6 @@ bool testRecord(char record[])
 	if (commaCnt != 4) {
 		newLineChar = strcspn(record, "\n");
 		strncpy(errorMessage, record, newLineChar);
-
 		displayError(CorruptRec, errorMessage);
 		commaCnt == 0;
 		return false;

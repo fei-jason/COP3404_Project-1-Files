@@ -11,7 +11,7 @@
 #pragma once
 
 // Keywords used to perform appropriate search
-enum searchTypes { Name };
+enum searchTypes { CreditsEq, CreditsLess, CreditsMore, Email, EmailPart, FullName, FName, LName, GPAEq, GPALess, GPAMore, Num, NumPart };
 				   
 // Function Prototypes
 void performSearch(struct student* hashTable[], char* type, char* string);
