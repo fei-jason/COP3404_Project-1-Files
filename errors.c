@@ -53,7 +53,7 @@ void displayError(int errorType, char* errorInfo)
             printf("Error : Program Unable To Find Specified File (%s)\n", errorInfo);
             break;
         case CommandLineArgs:
-            printf("Error : Missing Command-line Arguments\n", errorInfo);
+            printf("Error : Missing Command-line Arguments\n");
             break;
         default:
             break;

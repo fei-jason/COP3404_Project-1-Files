@@ -129,7 +129,6 @@ void processSearchFile(struct student* hashTable[], char* filename)
 
 	ptr = fopen(filename, "r");
 	if (ptr == NULL){
-		//perform error handling here
 		displayError(FileNotFound, filename);
 		exit(1);
 	}
@@ -140,7 +139,7 @@ void processSearchFile(struct student* hashTable[], char* filename)
 	}
 	printf("\n");
 
-	while (fgets(record, INPUT_BUF_SIZE, ptr) != NULL) {
+	while (fgets(record, SEARCH_BUF_SIZE, ptr) != NULL) {
 		char* copy = strdup(record);
 		searchType = strtok(copy, ",");
 		searchQuery = strtok(NULL, ",");
@@ -181,6 +180,7 @@ bool testRecord(char record[])
 	if (strLen < 35 || strLen > 60) {
 		newLineChar = strcspn(record, "\n");
 		strncpy(errorMessage, record, newLineChar);
+		errorMessage[newLineChar] = '\0';
 		displayError(ShortRec, errorMessage);
 		return false;
 	}	
@@ -188,6 +188,7 @@ bool testRecord(char record[])
 	if (commaCnt != 4) {
 		newLineChar = strcspn(record, "\n");
 		strncpy(errorMessage, record, newLineChar);
+		errorMessage[newLineChar] = '\0';
 		displayError(CorruptRec, errorMessage);
 		commaCnt == 0;
 		return false;
